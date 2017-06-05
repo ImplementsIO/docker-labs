@@ -1,0 +1,6 @@
+#!/usr/bin/with-contenv sh
+
+# osx : sed -i '' "s/HOST/${RBENV_SHELL}/g" /etc/nginx/conf.d/node.conf
+# linux sed -i "s/HOST/${RBENV_SHELL}/g" /etc/nginx/conf.d/node.conf
+
+exec /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf;
