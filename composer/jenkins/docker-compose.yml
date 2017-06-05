@@ -1,0 +1,31 @@
+version: '2'
+services:
+    slave-java:
+        image: registry.aliyuncs.com/acs-sample/jenkins-slave-dind-java
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - ./data/slave_java/.m2:/home/jenkins/.m2/ # cache
+            # - ./conf/insta360_maven_settings.xml:/usr/share/maven/conf/settings.xml:ro
+        restart: always
+
+    slave-nodejs:
+        image: registry.aliyuncs.com/acs-sample/jenkins-slave-dind-nodejs
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - ./data/slave_nodejs/.npm:/home/jenkins/.npm/ # cache
+        restart: always
+
+    app:
+        image: jenkins:2.46.2-alpine
+        volumes:
+          - ./data/jenkins_home:/var/jenkins_home
+        environment:
+            # - JAVA_OPTS=-Dhudson.footerURL=http://implements.io
+        ports:
+            - 8080:8080
+            # - 50000:50000
+        privileged: true
+        restart: always
+        depends_on:
+            - slave-nodejs
+            - slave-java
