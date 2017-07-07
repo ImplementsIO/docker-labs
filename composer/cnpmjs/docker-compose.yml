@@ -1,0 +1,29 @@
+version: '2'
+services:
+  proxy:
+    image: nginx:stable-alpine
+    volumes:
+      - ./conf/nginx/conf.d:/etc/nginx/conf.d
+    ports:
+      - 80:80
+    depends_on:
+      - cnpm
+    networks:
+      - docker_cnpm
+
+  cnpm:
+    image: cnpm
+    hostname: npm
+    # restart: always
+    volumes:
+      - ./conf/config.js:/app/dist/config/config.js
+      - ./data/:/data
+    ports:
+      - 7001:7001
+      - 7002:7002
+    networks:
+      - docker_cnpm
+
+networks:
+  docker_cnpm:
+    driver: bridge
