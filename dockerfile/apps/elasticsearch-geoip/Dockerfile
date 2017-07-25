@@ -16,3 +16,5 @@ RUN mkdir -p /usr/share/elasticsearch/config/ingest-geoip \
     && tar -xf country.tar.gz \
     && mv **/*.mmdb /usr/share/elasticsearch/config/ingest-geoip/ \
     && rm -rf /tmp/geoip
+
+CMD ["-E", "network.host=0.0.0.0", "-E", "discovery.zen.minimum_master_nodes=1"]    
