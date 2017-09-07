@@ -40,7 +40,7 @@ RUN set -ex; \
 
 RUN set -x \
 	\
-	&& apk add --no-cache --virtual .fetch-deps \
+	&& apk add --update --no-cache --virtual .fetch-deps \
 		ca-certificates \
 		curl \
     tar \
