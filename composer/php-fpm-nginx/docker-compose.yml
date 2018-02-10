@@ -11,6 +11,6 @@ services:
 
     php-fpm:
         image: php:7.1-fpm-alpine
-        volumes:
-          - ./code:/usr/share/nginx/html
+        volumes_from:
+          - nginx
         restart: always
