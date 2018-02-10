@@ -5,7 +5,7 @@ services:
         ports:
           - 8000:80
         volumes:
-            - ./code:/usr/share/nginx/html
+            - ./code:/var/www/html
             - ./conf/nginx/conf.d:/etc/nginx/conf.d
         restart: always
 
