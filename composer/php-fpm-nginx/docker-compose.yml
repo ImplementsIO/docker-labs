@@ -1,0 +1,16 @@
+version: '2'
+services:
+    nginx:
+        image: nginx:stable-alpine
+        ports:
+          - 8000:80
+        volumes:
+            - ./code:/usr/share/nginx/html
+            - ./conf/nginx/conf.d:/etc/nginx/conf.d
+        restart: always
+
+    php-fpm:
+        image: php:7.1-fpm-alpine
+        volumes:
+          - ./code:/usr/share/nginx/html
+        restart: always
